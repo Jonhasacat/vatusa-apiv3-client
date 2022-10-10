@@ -1,0 +1,10 @@
+setup.cfg
+setup.py
+vatusa_api_client/__init__.py
+vatusa_api_client/client.py
+vatusa_api_client/models.py
+vatusa_api_client.egg-info/PKG-INFO
+vatusa_api_client.egg-info/SOURCES.txt
+vatusa_api_client.egg-info/dependency_links.txt
+vatusa_api_client.egg-info/requires.txt
+vatusa_api_client.egg-info/top_level.txt

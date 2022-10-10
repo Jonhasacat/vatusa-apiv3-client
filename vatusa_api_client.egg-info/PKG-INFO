@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: vatusa-api-client
+Version: 1.0.0
+Summary: VATUSA API Client
+Home-page: UNKNOWN
+Author: Jon
+Author-email: vatusa12@vatusa.net
+License: UNKNOWN
+Keywords: VATUSA API
+Platform: UNKNOWN
+Requires-Python: >=3.9
+
+       # noqa: E501
+    
+
