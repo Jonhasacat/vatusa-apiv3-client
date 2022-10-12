@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 from typing import Optional, List
 from vatusa_api_client.models import (ControllerData, ControllerDetails, ControllerActionLog,
-                                      FacilityData, FacilityRequestsData, Config)
+                                      FacilityData, FacilityRequestsData, Config, NewsPostData)
 
 
 class Client:
@@ -11,6 +11,7 @@ class Client:
     config: ConfigSubClient
     controller: ControllerSubClient
     facility: FacilitySubClient
+    news: NewsSubClient
     request: RequestSubClient
     solo: SoloSubClient
 
@@ -22,6 +23,7 @@ class Client:
         self.config = ConfigSubClient(self)
         self.controller = ControllerSubClient(self)
         self.facility = FacilitySubClient(self)
+        self.news = NewsSubClient(self)
         self.request = RequestSubClient(self)
         self.solo = SoloSubClient(self)
 
@@ -188,6 +190,41 @@ class RequestSubClient(SubClient):
 
     def update_visit_request(self, cid: int, admin_cid: int, accept: bool, reason: Optional[str]) -> bool:
         pass
+
+
+class NewsSubClient(SubClient):
+    def get_news(self) -> List[NewsPostData]:
+        return self.client.get('/news/', NewsPostData, is_list=True)
+
+    def create_news(self, facility: str, author_cid: int, title: str, body: str, banner_image_url: str, publish: bool):
+        return self.client.post('/news/', data={
+            'facility': facility,
+            'author_cid': author_cid,
+            'title': title,
+            'body': body,
+            'banner_image_url': banner_image_url,
+            'publish': publish
+        })
+
+    def update_news_post(self,
+                         post_id: int,
+                         facility: str,
+                         author_cid: int,
+                         title: str,
+                         body: str,
+                         banner_image_url: str,
+                         publish: bool):
+        return self.client.put('/news/%d' % post_id, data={
+            'facility': facility,
+            'author_cid': author_cid,
+            'title': title,
+            'body': body,
+            'banner_image_url': banner_image_url,
+            'publish': publish
+        })
+
+    def delete_news_post(self, post_id: int):
+        return self.client.delete('/news/%d' % post_id)
 
 
 class SoloSubClient(SubClient):

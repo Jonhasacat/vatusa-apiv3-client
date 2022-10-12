@@ -136,5 +136,16 @@ class Config(BaseModel):
     ratings: List[ConfigItemRating]
 
 
+class NewsPostData(BaseModel):
+    id: int
+    facility: str
+    author: ControllerMinimal
+    title: str
+    body: str
+    banner_image_url: str
+    content_date: datetime.datetime
+    is_published: bool
+
+
 ControllerData.update_forward_refs()
 ControllerDetails.update_forward_refs()
